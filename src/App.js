@@ -10,6 +10,7 @@ import {
   News,
   CryptoDetails,
 } from './components';
+import 'antd/dist/reset.css';
 
 import './App.css';
 const App = () => {
@@ -22,19 +23,17 @@ const App = () => {
         <Layout>
           <div className="routes">
             <Routes>
-              <Route path="/" element={<h1>Homepage</h1>} />
-              <Route
-                path="/cryptocurrencies"
-                element={<h1>Cryptocurrencies</h1>}
-              />
-              <Route path="/exchanges" element={<h1>Exchanges</h1>} />
-              <Route path="/crypto/:coinId" element={<h1>CryptoDetails</h1>} />
-              <Route path="/news" element={<h1>News</h1>} />
+              <Route path="/" element={<Homepage />} />
+              <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
+              <Route path="/exchanges" element={<Exchanges />} />
+              <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+              <Route path="/news" element={<News />} />
             </Routes>
           </div>
         </Layout>
+
+        <div className="footer"></div>
       </div>
-      <div className="footer"></div>
     </div>
   );
 };

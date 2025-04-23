@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 import { Layout, Typography, Space } from 'antd';
 
 import {

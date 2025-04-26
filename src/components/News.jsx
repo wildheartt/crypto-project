@@ -6,8 +6,8 @@ import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
 
 const News = () => {
   const { data, isFetching, error } = useGetCryptoNewsQuery({
-    newsCategory: 'Elon Musk', // или 'Cryptocurrency'
-    count: 10, // тот же limit, что был в fetch-примере
+    newsCategory: 'Elon Musk',
+    count: 10,
   });
 
   if (isFetching) return <p>Загрузка...</p>;

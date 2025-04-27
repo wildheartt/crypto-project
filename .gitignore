@@ -5,7 +5,7 @@ node_modules/
 # testing
 coverage/
 
-# production
+# production ooo
 build/
 
 # misc

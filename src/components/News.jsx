@@ -4,22 +4,21 @@ import moment from 'moment';
 
 import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
 
-const News = () => {
-  const { data, isFetching, error } = useGetCryptoNewsQuery({
-    newsCategory: 'Elon Musk',
-    count: 10,
+const { Text, Title } = Typography;
+const { Option } = Select;
+
+const News = ({ simplified }) => {
+  const { data: cryptoNews } = useGetCryptoNewsQuery({
+    newsCategory: 'Cryptocurrency',
+    count: simplified ? 10 : 100,
   });
-
-  if (isFetching) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error.error || 'API error'}</p>;
-
-  return (
-    <ul>
-      {data?.value?.map((n) => (
-        <li key={n.id}>{n.name}</li>
-      ))}
-    </ul>
-  );
 };
+
+console.log(cryptoNews);
+
+return <div>Новости</div>;
+
+if (isFetching) return <p>Загрузка...</p>;
+if (error) return <p>Ошибка: {error.error || 'API error'}</p>;
 
 export default News;

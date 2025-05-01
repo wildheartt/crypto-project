@@ -46,11 +46,7 @@ const CryptoDetails = () => {
       icon: <DollarCircleOutlined />,
     },
     { title: 'Ранг', value: cryptoDetails?.rank, icon: <NumberOutlined /> },
-    {
-      title: 'Объём за 24 часа',
-      value: `$ ${cryptoDetails?.volume && millify(cryptoDetails?.volume)}`,
-      icon: <ThunderboltOutlined />,
-    },
+
     {
       title: 'Рыночная капитализация',
       value: `$ ${cryptoDetails?.marketCap && millify(cryptoDetails?.marketCap)}`,
@@ -126,7 +122,7 @@ const CryptoDetails = () => {
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
             <Title level={3} className="coin-details-heading">
-              {cryptoDetails.name} Value Statistics
+              Статистика {cryptoDetails.name}
             </Title>
             <p>
               Обзор, показывающий статистику {cryptoDetails.name}, такую как
@@ -146,7 +142,7 @@ const CryptoDetails = () => {
         <Col className="other-stats-info">
           <Col className="coin-value-statistics-heading">
             <Title level={3} className="coin-details-heading">
-              Прочая статистическая информация
+              Дополнительные данные
             </Title>
             <p>
               Обзор, показывающий статистику {cryptoDetails.name}, такую как
@@ -167,13 +163,13 @@ const CryptoDetails = () => {
       <Col className="coin-desc-link">
         <Row className="coin-desc">
           <Title level={3} className="coin-details-heading">
-            What is {cryptoDetails.name}?
+            Что такое {cryptoDetails.name}?
           </Title>
           {HTMLReactParser(cryptoDetails.description)}
         </Row>
         <Col className="coin-links">
           <Title level={3} className="coin-details-heading">
-            {cryptoDetails.name} Links
+            Полезные ссылки по {cryptoDetails.name}
           </Title>
           {cryptoDetails.links?.map((link) => (
             <Row className="coin-link" key={link.name}>

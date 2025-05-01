@@ -7,7 +7,6 @@ import {
   Exchanges,
   Homepage,
   Cryptocurrencies,
-  News,
   CryptoDetails,
 } from './components';
 import 'antd/dist/reset.css';
@@ -27,7 +26,6 @@ const App = () => {
               <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
               <Route path="/exchanges" element={<Exchanges />} />
               <Route path="/crypto/:coinId" element={<CryptoDetails />} />
-              <Route path="/news" element={<News />} />
             </Routes>
           </div>
         </Layout>

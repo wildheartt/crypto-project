@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 import { Col, Row, Typography } from 'antd';
 import {
@@ -12,6 +13,7 @@ import {
 } from 'chart.js';
 
 const { Title } = Typography;
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,20 +28,17 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinTimestamp = [];
 
   for (let i = 0; i < (coinHistory?.data?.history?.length || 0); i += 1) {
-    coinPrice.push(coinHistory.data.history[i].price);
-    coinTimestamp.push(
-      new Date(
-        coinHistory.data.history[i].timestamp * 1000,
-      ).toLocaleDateString(),
-    );
+    const point = coinHistory.data.history[i];
+    coinPrice.push(point.price);
+    coinTimestamp.push(new Date(point.timestamp * 1000).toLocaleDateString());
   }
 
   const data = {
-    labels: coinTimestamp.reverse(),
+    labels: coinTimestamp.slice().reverse(),
     datasets: [
       {
         label: 'Price (USD)',
-        data: coinPrice.reverse(),
+        data: coinPrice.slice().reverse(),
         borderColor: '#0071bd',
         backgroundColor: '#0071bd',
         fill: false,
@@ -58,7 +57,7 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
     <>
       <Row className="chart-header">
         <Title level={2} className="chart-title">
-          {coinName} Price Chart{' '}
+          {coinName} Price Chart
         </Title>
         <Col className="price-container">
           <Title level={5} className="price-change">
@@ -72,6 +71,24 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
       <Line data={data} options={options} />
     </>
   );
+};
+
+/* --- PropTypes для линтера --- */
+LineChart.propTypes = {
+  coinHistory: PropTypes.shape({
+    data: PropTypes.shape({
+      change: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      history: PropTypes.arrayOf(
+        PropTypes.shape({
+          price: PropTypes.number,
+          timestamp: PropTypes.number,
+        }),
+      ),
+    }),
+  }).isRequired,
+  currentPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  coinName: PropTypes.string.isRequired,
 };
 
 export default LineChart;

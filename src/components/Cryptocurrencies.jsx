@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import millify from 'millify';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Input } from 'antd';
+import PropTypes from 'prop-types';
 
 import { useGetCryptosQuery } from '../services/cryptoApi';
 import Loader from './Loader';
@@ -61,4 +62,11 @@ const Cryptocurrencies = ({ simplified }) => {
   );
 };
 
+Cryptocurrencies.propTypes = {
+  simplified: PropTypes.bool,
+};
+
+Cryptocurrencies.defaultProps = {
+  simplified: false,
+};
 export default Cryptocurrencies;

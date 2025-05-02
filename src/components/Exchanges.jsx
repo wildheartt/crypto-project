@@ -3,7 +3,7 @@ import millify from 'millify';
 import { Collapse, Row, Col, Typography, Avatar, Empty } from 'antd';
 import HTMLReactParser from 'html-react-parser';
 
-import { useGetExchangesQuery } from '../services/cryptoApi';
+import { useGetExchangesQuery } from '../services/exchangeApi';
 import Loader from './Loader';
 
 const { Text } = Typography;
@@ -11,7 +11,7 @@ const { Panel } = Collapse;
 
 const Exchanges = () => {
   const { data, isFetching, error } = useGetExchangesQuery();
-  const exchanges = data?.data?.exchanges ?? [];
+  const exchanges = data ?? [];
 
   if (isFetching) return <Loader />;
   if (error || exchanges.length === 0)
@@ -38,14 +38,14 @@ const Exchanges = () => {
                       <Text strong>{ex.rank}.</Text>{' '}
                       <Avatar
                         className="exchange-image"
-                        src={ex.iconUrl}
+                        src={ex.image || '/placeholder.svg'}
                         alt={ex.name}
                       />{' '}
                       <Text strong>{ex.name}</Text>
                     </Col>
-                    <Col span={6}>${millify(ex.volume)}</Col>
-                    <Col span={6}>{millify(ex.numberOfMarkets)}</Col>
-                    <Col span={6}>{millify(ex.marketShare)}%</Col>
+                    <Col span={6}>{millify(ex.trade_volume_24h_btc)}</Col>
+                    <Col span={6}>{ex.trust_score_rank}</Col>
+                    <Col span={6}>{ex.trust_score}</Col>
                   </Row>
                 }
               >

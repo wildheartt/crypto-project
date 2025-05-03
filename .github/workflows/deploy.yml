@@ -1,51 +1,46 @@
-name: CI
+name: Deploy
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - tests-js # ваша ветка, триггер деплоя
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  build-test-lint:
+  build-and-deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [18]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test
-      - run: npm run build
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: build/
+        node-version: [18.x, 22.x]
 
-  deploy:
-    needs: build-test-lint
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Download build
-        uses: actions/download-artifact@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          name: build
-          path: build/
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Show build output
+        run: ls -la build
+
       - name: Deploy to GitHub Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload Pages artifact 📦
-        uses: actions/upload-pages-artifact@v1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: build/
-
-      - name: Deploy 📤
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build
+          publish_branch: gh-pages
+          # optional: preserve existing files
+          keep_files: true

@@ -27,7 +27,7 @@ const Exchanges = () => {
       </Row>
 
       <Row gutter={[0, 8]}>
-        {exchanges.map((ex) => (
+        {exchanges.map(ex => (
           <Col span={24} key={ex.uuid}>
             <Collapse>
               <Panel
@@ -49,9 +49,7 @@ const Exchanges = () => {
                   </Row>
                 }
               >
-                {ex.description
-                  ? HTMLReactParser(ex.description)
-                  : 'Описание отсутствует'}
+                {ex.description ? HTMLReactParser(ex.description) : 'Описание отсутствует'}
               </Panel>
             </Collapse>
           </Col>

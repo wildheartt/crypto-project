@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import LineChart from '../LineChart';
 
 jest.mock('react-chartjs-2', () => ({
-  Line: () => <div data-testid="mocked-line-chart" />,
+  Line: () => <div data-testid="mocked-line-chart" />
 }));
 
 describe('LineChart', () => {
@@ -11,11 +11,11 @@ describe('LineChart', () => {
     coinHistory: {
       history: [
         { price: '100', timestamp: 1625097600 },
-        { price: '200', timestamp: 1625184000 },
-      ],
+        { price: '200', timestamp: 1625184000 }
+      ]
     },
     currentPrice: '150',
-    coinName: 'Bitcoin',
+    coinName: 'Bitcoin'
   };
 
   it('рендерится без ошибок', () => {
@@ -36,7 +36,7 @@ describe('LineChart', () => {
   it('корректно обрабатывает отсутствие данных', () => {
     const emptyProps = {
       ...mockProps,
-      coinHistory: { history: [] },
+      coinHistory: { history: [] }
     };
     render(<LineChart {...emptyProps} />);
     expect(screen.getByTestId('mocked-line-chart')).toBeInTheDocument();
@@ -45,7 +45,7 @@ describe('LineChart', () => {
   it('корректно обрабатывает отсутствие истории', () => {
     const noHistoryProps = {
       ...mockProps,
-      coinHistory: null,
+      coinHistory: null
     };
     render(<LineChart {...noHistoryProps} />);
     expect(screen.getByText(/No data available/i)).toBeInTheDocument();

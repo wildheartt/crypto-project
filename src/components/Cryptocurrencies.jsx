@@ -58,11 +58,11 @@ const Cryptocurrencies = ({ simplified }) => {
 };
 
 Cryptocurrencies.propTypes = {
-  simplified: PropTypes.bool,
+  simplified: PropTypes.bool
 };
 
 Cryptocurrencies.defaultProps = {
-  simplified: false,
+  simplified: false
 };
 
 export default Cryptocurrencies;

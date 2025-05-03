@@ -7,7 +7,7 @@ import CryptoDetails from '../CryptoDetails';
 import { cryptoApi } from '../../services/cryptoApi';
 
 jest.mock('react-chartjs-2', () => ({
-  Line: () => null,
+  Line: () => null
 }));
 jest.mock('html-react-parser', () => text => text);
 
@@ -21,8 +21,8 @@ jest.mock('../../services/cryptoApi', () => {
       ...actual.cryptoApi,
       reducerPath: 'cryptoApi',
       reducer: (state = {}) => state,
-      middleware: () => next => action => next(action),
-    },
+      middleware: () => next => action => next(action)
+    }
   };
 });
 
@@ -42,9 +42,9 @@ const mockCoin = {
       numberOfMarkets: 10,
       numberOfExchanges: 5,
       description: 'Описание TestCoin',
-      links: [{ name: 'Website', type: 'website', url: 'https://test.com' }],
-    },
-  },
+      links: [{ name: 'Website', type: 'website', url: 'https://test.com' }]
+    }
+  }
 };
 
 const mockHistory = {
@@ -52,16 +52,16 @@ const mockHistory = {
     change: '10',
     history: [
       { price: '1000', timestamp: 1234567890 },
-      { price: '1200', timestamp: 1234567891 },
-    ],
-  },
+      { price: '1200', timestamp: 1234567891 }
+    ]
+  }
 };
 
 const store = configureStore({
   reducer: {
-    [cryptoApi.reducerPath]: cryptoApi.reducer,
+    [cryptoApi.reducerPath]: cryptoApi.reducer
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(cryptoApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(cryptoApi.middleware)
 });
 
 const renderComponent = async () => {
@@ -87,12 +87,12 @@ describe('CryptoDetails', () => {
     useGetCryptoDetailsQuery.mockReturnValue({
       data: mockCoin,
       isFetching: false,
-      error: null,
+      error: null
     });
     useGetCryptoHistoryQuery.mockReturnValue({
       data: mockHistory.data,
       isFetching: false,
-      error: null,
+      error: null
     });
   });
 
@@ -104,7 +104,7 @@ describe('CryptoDetails', () => {
     useGetCryptoDetailsQuery.mockReturnValue({
       data: null,
       isFetching: true,
-      error: null,
+      error: null
     });
 
     render(
@@ -124,7 +124,7 @@ describe('CryptoDetails', () => {
     useGetCryptoDetailsQuery.mockReturnValue({
       data: null,
       isFetching: false,
-      error: { message: 'Ошибка загрузки данных' },
+      error: { message: 'Ошибка загрузки данных' }
     });
 
     render(
@@ -144,7 +144,7 @@ describe('CryptoDetails', () => {
     useGetCryptoDetailsQuery.mockReturnValue({
       data: { data: { coin: null } },
       isFetching: false,
-      error: null,
+      error: null
     });
 
     render(
@@ -196,7 +196,7 @@ describe('CryptoDetails', () => {
     await waitFor(() => {
       expect(useGetCryptoHistoryQuery).toHaveBeenCalledWith({
         coinId: '1',
-        timePeriod: '24h',
+        timePeriod: '24h'
       });
     });
   });

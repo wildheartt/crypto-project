@@ -11,10 +11,10 @@ const createTestStore = () =>
   configureStore({
     reducer: {
       [cryptoApi.reducerPath]: cryptoApi.reducer,
-      [exchangeApi.reducerPath]: exchangeApi.reducer,
+      [exchangeApi.reducerPath]: exchangeApi.reducer
     },
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(cryptoApi.middleware, exchangeApi.middleware),
+      getDefaultMiddleware().concat(cryptoApi.middleware, exchangeApi.middleware)
   });
 
 jest.mock('./components', () => ({
@@ -22,7 +22,7 @@ jest.mock('./components', () => ({
   Homepage: () => <div data-testid="homepage">Homepage</div>,
   Cryptocurrencies: () => <div data-testid="cryptocurrencies">Cryptocurrencies</div>,
   Exchanges: () => <div data-testid="exchanges">Exchanges</div>,
-  CryptoDetails: () => <div data-testid="crypto-details">CryptoDetails</div>,
+  CryptoDetails: () => <div data-testid="crypto-details">CryptoDetails</div>
 }));
 
 const renderApp = (initialRoute = '/') => {

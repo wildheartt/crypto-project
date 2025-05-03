@@ -7,8 +7,8 @@ import { exchangeApi } from '../services/exchangeApi';
 export default configureStore({
   reducer: {
     [cryptoApi.reducerPath]: cryptoApi.reducer,
-    [exchangeApi.reducerPath]: exchangeApi.reducer,
+    [exchangeApi.reducerPath]: exchangeApi.reducer
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(cryptoApi.middleware, exchangeApi.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(cryptoApi.middleware, exchangeApi.middleware)
 });

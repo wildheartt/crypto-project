@@ -8,9 +8,9 @@ import { cryptoApi } from '../../services/cryptoApi';
 
 const store = configureStore({
   reducer: {
-    [cryptoApi.reducerPath]: cryptoApi.reducer,
+    [cryptoApi.reducerPath]: cryptoApi.reducer
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(cryptoApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(cryptoApi.middleware)
 });
 
 jest.mock('../../services/cryptoApi', () => ({
@@ -18,8 +18,8 @@ jest.mock('../../services/cryptoApi', () => ({
   cryptoApi: {
     reducerPath: 'cryptoApi',
     reducer: (state = {}) => state,
-    middleware: () => next => action => next(action),
-  },
+    middleware: () => next => action => next(action)
+  }
 }));
 
 const { useGetCryptosQuery } = require('../../services/cryptoApi');
@@ -29,7 +29,7 @@ const mockStats = {
   total24hVolume: '1000000',
   totalMarketCap: '2000000000',
   totalMarkets: 500,
-  totalExchanges: 50,
+  totalExchanges: 50
 };
 
 const mockCoins = [
@@ -40,7 +40,7 @@ const mockCoins = [
     price: '50000',
     marketCap: '900000000',
     change: '2',
-    iconUrl: 'https://bitcoin.org/img.png',
+    iconUrl: 'https://bitcoin.org/img.png'
   },
   {
     uuid: '2',
@@ -49,8 +49,8 @@ const mockCoins = [
     price: '3000',
     marketCap: '300000000',
     change: '3',
-    iconUrl: 'https://ethereum.org/img.png',
-  },
+    iconUrl: 'https://ethereum.org/img.png'
+  }
 ];
 
 const renderComponent = () => {
@@ -72,7 +72,7 @@ describe('Homepage', () => {
     useGetCryptosQuery.mockReturnValue({
       data: undefined,
       isFetching: true,
-      error: undefined,
+      error: undefined
     });
 
     renderComponent();
@@ -85,7 +85,7 @@ describe('Homepage', () => {
     useGetCryptosQuery.mockReturnValue({
       data: undefined,
       isFetching: false,
-      error: { message: errorMessage },
+      error: { message: errorMessage }
     });
 
     renderComponent();
@@ -98,11 +98,11 @@ describe('Homepage', () => {
       data: {
         data: {
           stats: mockStats,
-          coins: mockCoins,
-        },
+          coins: mockCoins
+        }
       },
       isFetching: false,
-      error: undefined,
+      error: undefined
     });
 
     renderComponent();
@@ -121,11 +121,11 @@ describe('Homepage', () => {
       data: {
         data: {
           stats: mockStats,
-          coins: mockCoins,
-        },
+          coins: mockCoins
+        }
       },
       isFetching: false,
-      error: undefined,
+      error: undefined
     });
 
     renderComponent();
@@ -143,11 +143,11 @@ describe('Homepage', () => {
       data: {
         data: {
           stats: mockStats,
-          coins: mockCoins,
-        },
+          coins: mockCoins
+        }
       },
       isFetching: false,
-      error: undefined,
+      error: undefined
     });
 
     renderComponent();
@@ -162,11 +162,11 @@ describe('Homepage', () => {
       data: {
         data: {
           stats: mockStats,
-          coins: mockCoins,
-        },
+          coins: mockCoins
+        }
       },
       isFetching: false,
-      error: undefined,
+      error: undefined
     });
 
     renderComponent();

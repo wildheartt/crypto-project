@@ -6,7 +6,7 @@ import Exchanges from '../Exchanges';
 jest.mock('../Loader', () => () => <div data-testid="loader">Loading...</div>);
 
 jest.mock('../../services/exchangeApi', () => ({
-  useGetExchangesQuery: jest.fn(),
+  useGetExchangesQuery: jest.fn()
 }));
 import { useGetExchangesQuery } from '../../services/exchangeApi';
 
@@ -19,7 +19,7 @@ describe('Exchanges component', () => {
     useGetExchangesQuery.mockReturnValue({
       data: undefined,
       isFetching: true,
-      error: false,
+      error: false
     });
 
     render(<Exchanges />);
@@ -30,7 +30,7 @@ describe('Exchanges component', () => {
     useGetExchangesQuery.mockReturnValue({
       data: [],
       isFetching: false,
-      error: true,
+      error: true
     });
     const { rerender } = render(<Exchanges />);
     expect(screen.getByText(/Список бирж недоступен \(нужен премиум-план\)/)).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe('Exchanges component', () => {
     useGetExchangesQuery.mockReturnValue({
       data: [],
       isFetching: false,
-      error: false,
+      error: false
     });
     rerender(<Exchanges />);
     expect(screen.getByText(/Список бирж недоступен \(нужен премиум-план\)/)).toBeInTheDocument();
@@ -53,13 +53,13 @@ describe('Exchanges component', () => {
       trade_volume_24h_btc: 1000,
       trust_score_rank: 5,
       trust_score: 7,
-      description: '<p>Описание биржи</p>',
+      description: '<p>Описание биржи</p>'
     };
 
     useGetExchangesQuery.mockReturnValue({
       data: [exchange],
       isFetching: false,
-      error: false,
+      error: false
     });
 
     render(<Exchanges />);

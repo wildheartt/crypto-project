@@ -11,7 +11,7 @@ import {
   StopOutlined,
   TrophyOutlined,
   CheckOutlined,
-  NumberOutlined,
+  NumberOutlined
 } from '@ant-design/icons';
 
 import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../services/cryptoApi';
@@ -27,7 +27,7 @@ const CryptoDetails = () => {
   const { data, isFetching, error } = useGetCryptoDetailsQuery(coinId);
   const { data: coinHistory } = useGetCryptoHistoryQuery({
     coinId,
-    timePeriod,
+    timePeriod
   });
 
   if (isFetching) return <Loader />;
@@ -42,47 +42,47 @@ const CryptoDetails = () => {
     {
       title: 'Цена в долларах США',
       value: `$ ${cryptoDetails?.price && millify(cryptoDetails?.price)}`,
-      icon: <DollarCircleOutlined />,
+      icon: <DollarCircleOutlined />
     },
     { title: 'Ранг', value: cryptoDetails?.rank, icon: <NumberOutlined /> },
     {
       title: 'Рыночная капитализация',
       value: `$ ${cryptoDetails?.marketCap && millify(cryptoDetails?.marketCap)}`,
-      icon: <DollarCircleOutlined />,
+      icon: <DollarCircleOutlined />
     },
     {
       title: 'Абсолютный максимум (дневн. ср.)',
       value: `$ ${cryptoDetails?.allTimeHigh?.price && millify(cryptoDetails?.allTimeHigh?.price)}`,
-      icon: <TrophyOutlined />,
-    },
+      icon: <TrophyOutlined />
+    }
   ];
 
   const genericStats = [
     {
       title: 'Количество рынков',
       value: cryptoDetails?.numberOfMarkets,
-      icon: <FundOutlined />,
+      icon: <FundOutlined />
     },
     {
       title: 'Количество бирж',
       value: cryptoDetails?.numberOfExchanges,
-      icon: <MoneyCollectOutlined />,
+      icon: <MoneyCollectOutlined />
     },
     {
       title: 'Подтверждённое предложение',
       value: cryptoDetails?.supply?.confirmed ? <CheckOutlined /> : <StopOutlined />,
-      icon: <ExclamationCircleOutlined />,
+      icon: <ExclamationCircleOutlined />
     },
     {
       title: 'Общее предложение',
       value: `$ ${cryptoDetails?.supply?.total && millify(cryptoDetails?.supply?.total)}`,
-      icon: <ExclamationCircleOutlined />,
+      icon: <ExclamationCircleOutlined />
     },
     {
       title: 'Циркулирующее предложение',
       value: `$ ${cryptoDetails?.supply?.circulating && millify(cryptoDetails?.supply?.circulating)}`,
-      icon: <ExclamationCircleOutlined />,
-    },
+      icon: <ExclamationCircleOutlined />
+    }
   ];
 
   return (

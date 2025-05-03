@@ -25,7 +25,7 @@ describe('Navbar', () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
-      value: 1024,
+      value: 1024
     });
   });
 
@@ -68,7 +68,7 @@ describe('Navbar', () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
-      value: 700,
+      value: 700
     });
 
     await act(async () => {
@@ -84,7 +84,7 @@ describe('Navbar', () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
-      value: 1024,
+      value: 1024
     });
 
     await act(async () => {
@@ -123,7 +123,7 @@ describe('Navbar', () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
-      value: 700,
+      value: 700
     });
 
     await renderNavbar();
@@ -133,7 +133,7 @@ describe('Navbar', () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
-      value: 1024,
+      value: 1024
     });
 
     await act(async () => {

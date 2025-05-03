@@ -1,15 +1,14 @@
 /* eslint-env jest */
 import '@testing-library/jest-dom';
+import React from 'react';
 
-// Глобальные моки
 global.console = {
   ...console,
   error: jest.fn(),
   warn: jest.fn(),
-  log: jest.fn(),
+  log: jest.fn()
 };
 
-// Мокаем window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({
@@ -20,20 +19,41 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(),
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
+    dispatchEvent: jest.fn()
+  }))
 });
 
-// Мокаем ResizeObserver
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),
-  disconnect: jest.fn(),
+  disconnect: jest.fn()
 }));
 
-// Мокаем IntersectionObserver
 global.IntersectionObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),
-  disconnect: jest.fn(),
+  disconnect: jest.fn()
+}));
+
+global.React = React;
+
+jest.mock('prop-types', () => ({
+  ...jest.requireActual('prop-types'),
+  any: jest.fn(),
+  array: jest.fn(),
+  bool: jest.fn(),
+  func: jest.fn(),
+  number: jest.fn(),
+  object: jest.fn(),
+  string: jest.fn(),
+  symbol: jest.fn(),
+  element: jest.fn(),
+  node: jest.fn(),
+  instanceOf: jest.fn(),
+  oneOf: jest.fn(),
+  oneOfType: jest.fn(),
+  arrayOf: jest.fn(),
+  objectOf: jest.fn(),
+  shape: jest.fn(),
+  exact: jest.fn()
 }));

@@ -6,9 +6,9 @@ process.env.REACT_APP_RAPIDAPI_KEY = 'test-key';
 
 const store = configureStore({
   reducer: {
-    [cryptoApi.reducerPath]: cryptoApi.reducer,
+    [cryptoApi.reducerPath]: cryptoApi.reducer
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(cryptoApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(cryptoApi.middleware)
 });
 
 jest.mock('@reduxjs/toolkit/query/react', () => ({
@@ -16,16 +16,16 @@ jest.mock('@reduxjs/toolkit/query/react', () => ({
   fetchBaseQuery: () => async args => {
     expect(args.headers).toEqual({
       'x-rapidapi-host': 'test-host',
-      'x-rapidapi-key': 'test-key',
+      'x-rapidapi-key': 'test-key'
     });
 
     if (args.url.includes('/coins')) {
       return {
         data: {
           data: {
-            coins: Array(5).fill({ uuid: '1' }),
-          },
-        },
+            coins: Array(5).fill({ uuid: '1' })
+          }
+        }
       };
     }
     if (args.url.includes('/coin/')) {
@@ -35,18 +35,18 @@ jest.mock('@reduxjs/toolkit/query/react', () => ({
             data: {
               history: [
                 { price: '100', timestamp: 1625097600 },
-                { price: '200', timestamp: 1625184000 },
-              ],
-            },
-          },
+                { price: '200', timestamp: 1625184000 }
+              ]
+            }
+          }
         };
       }
       return {
         data: {
           data: {
-            coin: { uuid: '42' },
-          },
-        },
+            coin: { uuid: '42' }
+          }
+        }
       };
     }
     if (args.url.includes('/exchanges')) {
@@ -55,15 +55,15 @@ jest.mock('@reduxjs/toolkit/query/react', () => ({
           data: {
             exchanges: [
               { uuid: '1', name: 'Exchange 1' },
-              { uuid: '2', name: 'Exchange 2' },
-            ],
-          },
-        },
+              { uuid: '2', name: 'Exchange 2' }
+            ]
+          }
+        }
       };
     }
     return { data: { data: {} } };
   },
-  createApi: jest.requireActual('@reduxjs/toolkit/query/react').createApi,
+  createApi: jest.requireActual('@reduxjs/toolkit/query/react').createApi
 }));
 
 describe('cryptoApi', () => {
@@ -85,7 +85,7 @@ describe('cryptoApi', () => {
       await store.dispatch(
         cryptoApi.endpoints.getCryptoHistory.initiate({
           coinId: '42',
-          timePeriod: '24h',
+          timePeriod: '24h'
         })
       );
 
@@ -108,7 +108,7 @@ describe('cryptoApi', () => {
       const result = await store.dispatch(
         cryptoApi.endpoints.getCryptoHistory.initiate({
           coinId: '42',
-          timePeriod: '24h',
+          timePeriod: '24h'
         })
       );
       expect(result.data.data.history).toHaveLength(2);
@@ -146,7 +146,7 @@ describe('cryptoApi', () => {
       const { result, waitForNextUpdate } = renderHook(() =>
         cryptoApi.endpoints.getCryptoHistory.useQuery({
           coinId: '42',
-          timePeriod: '24h',
+          timePeriod: '24h'
         })
       );
       await waitForNextUpdate();

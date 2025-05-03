@@ -2,13 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 
-import {
-  Navbar,
-  Exchanges,
-  Homepage,
-  Cryptocurrencies,
-  CryptoDetails,
-} from './components';
+import { Navbar, Exchanges, Homepage, Cryptocurrencies, CryptoDetails } from './components';
 import 'antd/dist/reset.css';
 
 import './App.css';

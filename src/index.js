@@ -17,5 +17,5 @@ root.render(
         <App />
       </Provider>
     </Router>
-  </StrictMode>,
+  </StrictMode>
 );

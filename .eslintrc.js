@@ -6,7 +6,7 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
-    jest: true,
+    jest: true
   },
   extends: [
     'eslint:recommended',
@@ -14,7 +14,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
-    'prettier',
+    'prettier'
   ],
   globals: {
     Atomics: 'readonly',
@@ -31,14 +31,14 @@ module.exports = {
     process: 'readonly',
     module: 'readonly',
     global: 'readonly',
-    require: 'readonly',
+    require: 'readonly'
   },
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   parser: '@typescript-eslint/parser',
   plugins: ['react', '@typescript-eslint', 'jsx-a11y', 'prettier'],
@@ -55,14 +55,14 @@ module.exports = {
       'error',
       {
         max: 1,
-        maxEOF: 1,
-      },
+        maxEOF: 1
+      }
     ],
     'no-underscore-dangle': [
       'error',
       {
-        allow: ['_d', '_dh', '_h', '_id', '_m', '_n', '_t', '_text'],
-      },
+        allow: ['_d', '_dh', '_h', '_id', '_m', '_n', '_t', '_text']
+      }
     ],
     'object-curly-newline': 0,
     'react/jsx-filename-extension': 0,
@@ -77,8 +77,8 @@ module.exports = {
       {
         components: ['Link'],
         specialLink: ['to', 'hrefLeft', 'hrefRight'],
-        aspects: ['noHref', 'invalidHref', 'preferButton'],
-      },
+        aspects: ['noHref', 'invalidHref', 'preferButton']
+      }
     ],
     'prettier/prettier': 'error',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
@@ -86,17 +86,17 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
     'no-undef': 'off',
-    'no-redeclare': 'off',
+    'no-redeclare': 'off'
   },
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
     },
     react: {
-      version: 'detect',
-    },
+      version: 'detect'
+    }
   },
   ignorePatterns: [
     '**/__tests__/**',
@@ -115,6 +115,6 @@ module.exports = {
     '.eslintrc.js',
     '.lintstagedrc.js',
     'babel.config.js',
-    'jest.config.js',
-  ],
+    'jest.config.js'
+  ]
 };

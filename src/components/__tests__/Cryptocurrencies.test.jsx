@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Cryptocurrencies from '../Cryptocurrencies';
 
 jest.mock('../../services/cryptoApi', () => ({
-  useGetCryptosQuery: jest.fn(),
+  useGetCryptosQuery: jest.fn()
 }));
 
 const { useGetCryptosQuery } = require('../../services/cryptoApi');
@@ -18,7 +18,7 @@ describe('Cryptocurrencies', () => {
       price: '50000',
       marketCap: '900000000',
       change: '2',
-      iconUrl: 'https://bitcoin.org/img.png',
+      iconUrl: 'https://bitcoin.org/img.png'
     },
     {
       uuid: '2',
@@ -27,7 +27,7 @@ describe('Cryptocurrencies', () => {
       price: '3000',
       marketCap: '300000000',
       change: '3',
-      iconUrl: 'https://ethereum.org/img.png',
+      iconUrl: 'https://ethereum.org/img.png'
     },
     {
       uuid: '3',
@@ -36,8 +36,8 @@ describe('Cryptocurrencies', () => {
       price: '0.2',
       marketCap: '30000000',
       change: '5',
-      iconUrl: 'https://dogecoin.com/img.png',
-    },
+      iconUrl: 'https://dogecoin.com/img.png'
+    }
   ];
 
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe('Cryptocurrencies', () => {
     useGetCryptosQuery.mockReturnValue({
       isFetching: true,
       error: undefined,
-      data: undefined,
+      data: undefined
     });
 
     render(
@@ -65,7 +65,7 @@ describe('Cryptocurrencies', () => {
     useGetCryptosQuery.mockReturnValue({
       isFetching: false,
       error: { message: errorMessage },
-      data: undefined,
+      data: undefined
     });
 
     render(
@@ -81,7 +81,7 @@ describe('Cryptocurrencies', () => {
     useGetCryptosQuery.mockReturnValue({
       isFetching: false,
       error: undefined,
-      data: { data: { coins: [] } },
+      data: { data: { coins: [] } }
     });
 
     render(
@@ -97,7 +97,7 @@ describe('Cryptocurrencies', () => {
     useGetCryptosQuery.mockReturnValue({
       isFetching: false,
       error: undefined,
-      data: { data: { coins: mockCoins } },
+      data: { data: { coins: mockCoins } }
     });
 
     render(
@@ -125,7 +125,7 @@ describe('Cryptocurrencies', () => {
     useGetCryptosQuery.mockReturnValue({
       isFetching: false,
       error: undefined,
-      data: { data: { coins: mockCoins } },
+      data: { data: { coins: mockCoins } }
     });
 
     render(
@@ -149,7 +149,7 @@ describe('Cryptocurrencies', () => {
     useGetCryptosQuery.mockReturnValue({
       isFetching: false,
       error: undefined,
-      data: { data: { coins: mockCoins } },
+      data: { data: { coins: mockCoins } }
     });
 
     render(

@@ -26,10 +26,7 @@ const Homepage = () => {
           <Statistic title="Всего криптовалют" value={globalStats.total} />
         </Col>
         <Col span={12}>
-          <Statistic
-            title="Всего бирж"
-            value={millify(globalStats.totalExchanges)}
-          />
+          <Statistic title="Всего бирж" value={millify(globalStats.totalExchanges)} />
         </Col>
         <Col span={12}>
           <Statistic
@@ -47,10 +44,7 @@ const Homepage = () => {
           <Statistic title="	Всего криптовалют" value={globalStats.total} />
         </Col>
         <Col span={12}>
-          <Statistic
-            title="	Всего рынков"
-            value={millify(globalStats.totalMarkets)}
-          />
+          <Statistic title="	Всего рынков" value={millify(globalStats.totalMarkets)} />
         </Col>
       </Row>
       <div className="home-heading-container">

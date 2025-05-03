@@ -16,7 +16,7 @@ const mockExchanges = [
     image: 'https://assets.coingecko.com/markets/images/52/small/binance.jpg',
     trust_score: 10,
     trust_score_rank: 1,
-    trade_volume_24h_btc: 100000,
+    trade_volume_24h_btc: 100000
   },
   {
     id: 'coinbase',
@@ -28,8 +28,8 @@ const mockExchanges = [
     image: 'https://assets.coingecko.com/markets/images/23/small/coinbase.jpg',
     trust_score: 10,
     trust_score_rank: 2,
-    trade_volume_24h_btc: 50000,
-  },
+    trade_volume_24h_btc: 50000
+  }
 ];
 
 // Создаем мок сервер
@@ -43,9 +43,9 @@ const server = setupServer(
 const createTestStore = () =>
   configureStore({
     reducer: {
-      [exchangeApi.reducerPath]: exchangeApi.reducer,
+      [exchangeApi.reducerPath]: exchangeApi.reducer
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(exchangeApi.middleware),
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(exchangeApi.middleware)
   });
 
 describe('exchangeApi', () => {
@@ -99,7 +99,7 @@ describe('exchangeApi', () => {
     const wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
 
     const { result: firstResult } = renderHook(() => useGetExchangesQuery(), {
-      wrapper,
+      wrapper
     });
 
     await waitFor(() => {
@@ -107,7 +107,7 @@ describe('exchangeApi', () => {
     });
 
     const { result: secondResult } = renderHook(() => useGetExchangesQuery(), {
-      wrapper,
+      wrapper
     });
 
     expect(secondResult.current.isLoading).toBe(false);

@@ -9,19 +9,12 @@ import {
   PointElement,
   LineElement,
   Tooltip,
-  Legend,
+  Legend
 } from 'chart.js';
 
 const { Title } = Typography;
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-  Legend,
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrice = [];
@@ -42,15 +35,15 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
         borderColor: '#0071bd',
         backgroundColor: '#0071bd',
         fill: false,
-        tension: 0.25,
-      },
-    ],
+        tension: 0.25
+      }
+    ]
   };
 
   const options = {
     responsive: true,
     plugins: { legend: { display: false } },
-    scales: { y: { beginAtZero: true } },
+    scales: { y: { beginAtZero: true } }
   };
 
   return (
@@ -81,14 +74,13 @@ LineChart.propTypes = {
       history: PropTypes.arrayOf(
         PropTypes.shape({
           price: PropTypes.number,
-          timestamp: PropTypes.number,
-        }),
-      ),
-    }),
+          timestamp: PropTypes.number
+        })
+      )
+    })
   }).isRequired,
-  currentPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  coinName: PropTypes.string.isRequired,
+  currentPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  coinName: PropTypes.string.isRequired
 };
 
 export default LineChart;

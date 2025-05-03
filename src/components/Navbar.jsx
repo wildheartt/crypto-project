@@ -8,18 +8,18 @@ const menuItems = [
   {
     label: <Link to="/">Главная</Link>,
     key: 'home',
-    icon: <HomeOutlined />,
+    icon: <HomeOutlined />
   },
   {
     label: <Link to="/cryptocurrencies">Криптовалюты</Link>,
     key: 'cryptocurrencies',
-    icon: <FundOutlined />,
+    icon: <FundOutlined />
   },
   {
     label: <Link to="/exchanges">Биржи</Link>,
     key: 'exchanges',
-    icon: <MoneyCollectOutlined />,
-  },
+    icon: <MoneyCollectOutlined />
+  }
 ];
 
 const Navbar = () => {

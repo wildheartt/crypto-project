@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Menu, Typography, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
-import {
-  HomeOutlined,
-  MoneyCollectOutlined,
-  FundOutlined,
-  MenuOutlined,
-} from '@ant-design/icons';
-
+import { Menu, Typography, Avatar, Button } from 'antd';
+import { MenuOutlined, HomeOutlined, FundOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 import icon from '../images/bitcoin.png';
+
+const menuItems = [
+  {
+    label: <Link to="/">Главная</Link>,
+    key: 'home',
+    icon: <HomeOutlined />,
+  },
+  {
+    label: <Link to="/cryptocurrencies">Криптовалюты</Link>,
+    key: 'cryptocurrencies',
+    icon: <FundOutlined />,
+  },
+  {
+    label: <Link to="/exchanges">Биржи</Link>,
+    key: 'exchanges',
+    icon: <MoneyCollectOutlined />,
+  },
+];
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(true);
@@ -35,30 +47,16 @@ const Navbar = () => {
   return (
     <div className="nav-container">
       <div className="logo-container">
-        <Avatar src={icon} size="large" />
+        <Avatar src={icon} size="large" aria-label="avatar" />
         <Typography.Title level={2} className="logo">
           <Link to="/">Криптостар</Link>
         </Typography.Title>
-        <Button
-          className="menu-control-container"
-          onClick={() => setActiveMenu(!activeMenu)}
-        >
+        <Button className="menu-control-container" onClick={() => setActiveMenu(!activeMenu)}>
           <MenuOutlined />
         </Button>
       </div>
-      {activeMenu && (
-        <Menu theme="dark">
-          <Menu.Item icon={<HomeOutlined />}>
-            <Link to="/">Главная</Link>
-          </Menu.Item>
-          <Menu.Item icon={<FundOutlined />}>
-            <Link to="/cryptocurrencies">Криптовалюты</Link>
-          </Menu.Item>
-          <Menu.Item icon={<MoneyCollectOutlined />}>
-            <Link to="/exchanges">Биржи</Link>
-          </Menu.Item>
-        </Menu>
-      )}
+
+      {activeMenu && <Menu theme="dark" items={menuItems} />}
     </div>
   );
 };

@@ -14,10 +14,7 @@ import {
   NumberOutlined,
 } from '@ant-design/icons';
 
-import {
-  useGetCryptoDetailsQuery,
-  useGetCryptoHistoryQuery,
-} from '../services/cryptoApi';
+import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../services/cryptoApi';
 import Loader from './Loader';
 import LineChart from './LineChart';
 
@@ -27,14 +24,17 @@ const { Option } = Select;
 const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimeperiod] = useState('7d');
-  const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const { data, isFetching, error } = useGetCryptoDetailsQuery(coinId);
   const { data: coinHistory } = useGetCryptoHistoryQuery({
     coinId,
     timePeriod,
   });
-  const cryptoDetails = data?.data?.coin;
 
   if (isFetching) return <Loader />;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data?.data?.coin) return <div>No data available</div>;
+
+  const cryptoDetails = data?.data?.coin;
 
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
@@ -45,7 +45,6 @@ const CryptoDetails = () => {
       icon: <DollarCircleOutlined />,
     },
     { title: 'Ранг', value: cryptoDetails?.rank, icon: <NumberOutlined /> },
-
     {
       title: 'Рыночная капитализация',
       value: `$ ${cryptoDetails?.marketCap && millify(cryptoDetails?.marketCap)}`,
@@ -71,11 +70,7 @@ const CryptoDetails = () => {
     },
     {
       title: 'Подтверждённое предложение',
-      value: cryptoDetails?.supply?.confirmed ? (
-        <CheckOutlined />
-      ) : (
-        <StopOutlined />
-      ),
+      value: cryptoDetails?.supply?.confirmed ? <CheckOutlined /> : <StopOutlined />,
       icon: <ExclamationCircleOutlined />,
     },
     {
@@ -94,29 +89,31 @@ const CryptoDetails = () => {
     <Col className="coin-detail-container">
       <Col className="coin-heading-container">
         <Title level={2} className="coin-name">
-          {data?.data?.coin.name} ({data?.data?.coin.symbol}) стоимость
+          {cryptoDetails.name} ({cryptoDetails.symbol}) стоимость
         </Title>
         <p>
-          {cryptoDetails.name} онлайн цена в долларах США (USD). Просмотреть
-          статистических данных о стоимости, капитализации рынка и предложении.
+          {cryptoDetails.name} онлайн цена в долларах США (USD). Просмотреть статистических данных о
+          стоимости, капитализации рынка и предложении.
         </p>
       </Col>
       <Select
         defaultValue="7d"
         className="select-timeperiod"
         placeholder="Select Timeperiod"
-        onChange={(value) => setTimeperiod(value)}
+        onChange={value => setTimeperiod(value)}
       >
-        {time.map((date) => (
+        {time.map(date => (
           <Option key={date}>{date}</Option>
         ))}
       </Select>
-      <LineChart
-        key={timePeriod}
-        coinHistory={coinHistory}
-        currentPrice={millify(cryptoDetails?.price)}
-        coinName={cryptoDetails?.name}
-      />
+      {coinHistory && (
+        <LineChart
+          key={timePeriod}
+          coinHistory={coinHistory}
+          currentPrice={millify(cryptoDetails?.price)}
+          coinName={cryptoDetails?.name}
+        />
+      )}
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
@@ -124,8 +121,8 @@ const CryptoDetails = () => {
               Статистика {cryptoDetails.name}
             </Title>
             <p>
-              Обзор, показывающий статистику {cryptoDetails.name}, такую как
-              базовая и котируемая валюта, ранг и объём торгов.
+              Обзор, показывающий статистику {cryptoDetails.name}, такую как базовая и котируемая
+              валюта, ранг и объём торгов.
             </p>
           </Col>
           {stats.map(({ icon, title, value }) => (
@@ -144,8 +141,8 @@ const CryptoDetails = () => {
               Дополнительные данные
             </Title>
             <p>
-              Обзор, показывающий статистику {cryptoDetails.name}, такую как
-              базовая и котируемая валюта, ранг и объём торгов.
+              Обзор, показывающий статистику {cryptoDetails.name}, такую как базовая и котируемая
+              валюта, ранг и объём торгов.
             </p>
           </Col>
           {genericStats.map(({ icon, title, value }) => (
@@ -170,7 +167,7 @@ const CryptoDetails = () => {
           <Title level={3} className="coin-details-heading">
             Полезные ссылки по {cryptoDetails.name}
           </Title>
-          {cryptoDetails.links?.map((link) => (
+          {cryptoDetails.links?.map(link => (
             <Row className="coin-link" key={link.name}>
               <Title level={5} className="link-name">
                 {link.type}

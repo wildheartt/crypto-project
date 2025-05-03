@@ -12,6 +12,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
   ],
   globals: {
     Atomics: 'readonly',
@@ -38,7 +41,7 @@ module.exports = {
     sourceType: 'module',
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint', 'jsx-a11y', 'prettier'],
   rules: {
     indent: 'off',
     'template-curly-spacing': 'off',
@@ -83,6 +86,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
     'no-undef': 'off',
+    'no-redeclare': 'off',
   },
   settings: {
     'import/resolver': {

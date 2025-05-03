@@ -1,42 +1,51 @@
-name: Deploy to GitHub Pages
+name: CI
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: write
+  pull_request:
+    branches: [main]
 
 jobs:
-  deploy:
+  build-test-lint:
     runs-on: ubuntu-latest
-    concurrency:
-      group: 'pages'
-      cancel-in-progress: true
-
+    strategy:
+      matrix:
+        node: [18]
     steps:
-      - name: 🛎  Checkout
-        uses: actions/checkout@v4
-
-      - name: 🔧  Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.node }}
           cache: 'npm'
-
-      - name: 📦  Install deps
-        run: npm ci
-
-      - name: 🧪  Run tests
-        run: npm test -- --watchAll=false
-
-      - name: 🛠  Build
-        run: npm run build
-
-      - name: 🚀  Deploy to Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          commit_message: 'Deploy: ${{ github.event.head_commit.message }}'
+          name: build
+          path: build/
+
+  deploy:
+    needs: build-test-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build/
+      - name: Deploy to GitHub Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload Pages artifact 📦
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build/
+
+      - name: Deploy 📤
+        uses: actions/deploy-pages@v1
